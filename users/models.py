@@ -6,7 +6,7 @@ from django.db.models.deletion import CASCADE
 
 class Teacher(models.Model):
     teacher = models.OneToOneField(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100, blank=true)
+    title = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now_add=True)
 
@@ -18,8 +18,8 @@ class Teacher(models.Model):
 
 class Subject(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    short_name = models.ChartField(max_length=10, blank=True)
-    full_name = models.ChartField(max_length=255, blank=True)
+    short_name = models.CharField(max_length=10, blank=True)
+    full_name = models.CharField(max_length=255, blank=True)
 
     class Meta:
         ordering = ['short_name']

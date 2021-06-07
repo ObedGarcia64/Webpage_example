@@ -5,7 +5,7 @@ from django.contrib import admin
 
 
 from django.contrib.auth.models import User
-from user.models import Teacher, Studentys, Subjects
+from users.models import Teacher, Student, Subject
 
 
 @admin.register(Teacher)
