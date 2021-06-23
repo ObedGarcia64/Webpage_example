@@ -7,5 +7,49 @@
 {% load static %}
 
 {% block container %}
-    <h1>Update Student Profile</h1>
+    <div class="container p-5 LoginForm__container">
+        <div class= "LoginForm__img">
+            <img src="{% static 'img/vkllogo.png' %}" alt="VKlogo"/>
+        </div>
+        <h3 class="my-3">Update Student Profile</h3>
+
+        <form method="POST" action="{% url 'update_teacher_profile' %}">
+            {% csrf_token %}
+            {% if error %}
+            <p class="mt-2 alert-danger mb-2 mx-auto d-block" role="alert">
+                {{error}}
+            </p>
+            {% endif %}
+
+            <div class="form-group">
+                <label class="mb-1">Student number</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="student_number"
+                    placeholder="Student Number"
+                />
+            </div>
+            
+            <div class="form-group">
+                <label class="mb-1">Group</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="group"
+                    placeholder="Group"
+                />
+            </div>
+            <label class="mb-1">Select your career</label>
+            <select  class="custom-select mx-auto d-block" type="text" required="true" name="career" id="inlineFormCustomSelect">
+                <option selected>Select an option</option>
+                {% for option in career_option %}
+                    <option value="{{option}}">{{option}}</option>
+                {% endfor %}
+            </select>
+            <button class="btm btn-primary mx-auto mt-5 d-block px-4" type="submit">
+                Save
+            </button>
+        </form>
+    </div>
 {% endblock container %}

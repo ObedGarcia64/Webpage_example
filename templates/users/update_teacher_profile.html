@@ -7,5 +7,32 @@
 {% load static %}
 
 {% block container %}
-    <h1>Update Teacher Profile</h1>
+    <div class="container p-5 LoginForm__container">
+        <div class= "LoginForm__img">
+            <img src="{% static 'img/vkllogo.png' %}" alt="VKlogo"/>
+        </div>
+        <h3 class="my-3">Update Teacher Profile</h3>
+
+        <form method="POST" action="{% url 'update_teacher_profile' %}">
+            {% csrf_token %}
+            {% if error %}
+            <p class="mt-2 alert-danger mb-2 mx-auto d-block" role="alert">
+                {{error}}
+            </p>
+            {% endif %}
+
+            <div class="form-group">
+                <label class="mb-1">Title</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    placeholder="title"
+                />
+            </div>
+            <button class="btm btn-primary mx-auto mt-5 d-block px-4" type="submit">
+                Save
+            </button>
+        </form>
+    </div>
 {% endblock container %}

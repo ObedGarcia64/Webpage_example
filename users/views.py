@@ -91,8 +91,27 @@ def logout_view(request):
 
 @login_required
 def update_teacher_profile(request):
+    teacher = request.user.teacher
+
+    if request.method == 'POST':
+        teacher.title = request.POST['title']
+        teacher.save()
+        return render(request, 'landing.html',{'user':'teacher'})
     return render(request, 'users/update_teacher_profile.html')
 
 @login_required
 def update_student_profile(request):
-    return render(request, 'users/update_student_profile.html')
+
+    subjects = Subject.objects.all()
+    careers = Student.CAREERS
+    career_options = []
+
+    for career in careers:
+        career_options.append(career[0])
+
+    return render(request, 
+                    'users/update_student_profile.html',
+                    {
+                        "subjects": subjects, 
+                        "career_options":career_options
+                    })
