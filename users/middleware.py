@@ -31,7 +31,7 @@ class ProfileCompletionMiddleware:
                         return redirect('update_teacher_profile')
             elif profile.type_of_user == "student":
                 if not profile.type_of_user == 'student':
-                    if not profile.student_number or profile.subject or profile.group or profile.career:
+                    if not profile.student_number or not profile.subject or not profile.group or not profile.career:
                         if request.path not in [reverse('update_student_profile'), reverse('logout')]:
                             return redirect('update_student_profile')
                 

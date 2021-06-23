@@ -13,7 +13,7 @@
         </div>
         <h3 class="my-3">Update Student Profile</h3>
 
-        <form method="POST" action="{% url 'update_teacher_profile' %}">
+        <form method="POST" action="{% url 'update_student_profile' %}">
             {% csrf_token %}
             {% if error %}
             <p class="mt-2 alert-danger mb-2 mx-auto d-block" role="alert">
@@ -43,11 +43,22 @@
             <label class="mb-1">Select your career</label>
             <select  class="custom-select mx-auto d-block" type="text" required="true" name="career" id="inlineFormCustomSelect">
                 <option selected>Select an option</option>
-                {% for option in career_option %}
+                {% for option in career_options %}
                     <option value="{{option}}">{{option}}</option>
                 {% endfor %}
             </select>
-            <button class="btm btn-primary mx-auto mt-5 d-block px-4" type="submit">
+
+            <p class="my-3"> Select your signatures</p>
+                {% for subject in subjects %}
+                    <div class="form-group">
+                        <input type="checkbox" class="ml-3" value="{{subject.short_name}}" name="{{subject.short_name}}" id="flexCheclDefault">
+                        <labe for="flexCheckDefault" class="ml-2">
+                            {{subject.full_name}}
+                        </label>
+                    </div>
+                {% endfor %}
+
+            <button class="btn btn-primary mx-auto mt-5 d-block px-4" type="submit">
                 Save
             </button>
         </form>

@@ -102,6 +102,25 @@ def update_teacher_profile(request):
 @login_required
 def update_student_profile(request):
 
+    if request.method == 'POST':
+        student = request.user.student
+        subjects = Subject.objects.all()
+
+
+        student.student_number = request.POST['student_number']
+        student.group = request.POST['group']
+        student.career = request.POST['career']
+
+        for subj in subjects:
+            try:
+                _subject = Subject.objects.get(short_name=request.POST[f'{subj}'])
+                student.subject.add(_subject)
+            except:
+                pass
+            
+        student.save()
+        return redirect('landing')
+
     subjects = Subject.objects.all()
     careers = Student.CAREERS
     career_options = []
