@@ -10,7 +10,7 @@ from django.views import View
 
 #Models
 from django.contrib.auth.models import User
-from users.models import Student, Teacher
+from users.models import Student, Teacher, Subject
 
 
 # Create your views here.
@@ -65,10 +65,12 @@ def signup(request):
         type_of_user = request.POST['type']
 
         if type_of_user == 'teacher':
-            profile = Teacher(teacher=user)
+            profile = Teacher(user=user)
 
         else:
-            profile = Student(student=user)
+            profile = Student(user=user)
+
+        profile.type_of_user = type_of_user
         profile.save()
 
 
@@ -86,3 +88,11 @@ def landing(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def update_teacher_profile(request):
+    return render(request, 'users/update_teacher_profile.html')
+
+@login_required
+def update_student_profile(request):
+    return render(request, 'users/update_student_profile.html')

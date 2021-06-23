@@ -4,5 +4,10 @@
         <a class="navbar=brand pr5 NavHeader__img" style="border-right: 1px solid #efefef">
             <img src="{% static 'img/vklogo.png' %}" alt="logo" class="d-iline-block align-top NavHeader__logo" height="30">
         </a>
+        {% if not request.user.is_anonymous %}
+            <a href="{% url 'logout' %}" class="btn btn-primary">
+            Logout
+            </a>
+        {% endif %}
     <div>
 </nav>
